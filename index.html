@@ -13,32 +13,24 @@
 
     <input type="number" id="ask"> <input type="number" id="bsk"> <input type="number" id="csk">
 
-    <button type="button" onclick="start()">Aprēķināt</button>
+    <button type="button" onclick=" start() ">Aprēķināt</button>
 
-    <p id="izvade"> </p>
+    <p id="resultats"> </p>
 
-    <p id="result"></p>
     <script>
         function disk(a, b, c) {
             return b * b - 4 * a * c;
         }
 
-        // function diskriminants() {
-        //     var a, b, c;
-        //     a = ask.value;
-        //     b = bsk.value;
-        //     c = csk.value;
-        //     var d = disk(a, b, c);
-        //     // document.getElementById("izvade").innerHTML = "D = " + d;
-        // }
 
-        function saknes (a,b,D){
-            if (D < 0){
+
+        function saknes(a, b, D) {
+            if (D < 0) {
                 return false;
-            } else{
-                var x1 = (-b+Math.sqrt(D)) / (2*a)
-                var x2= (-b-Math.sqrt(D)) / (2*a)
-                return [x1,x2];
+            } else {
+                var x1 = (-b + Math.sqrt(D)) / (2 * a);
+                var x2 = (-b - Math.sqrt(D)) / (2 * a);
+                return [x1, x2];
             }
         }
 
@@ -49,12 +41,22 @@
 
 
 
-        function start(){
+        function start() {
             var a = Number(ask.value);
-            var b = Number(ask.value);
-            var ac = Number(ask.value);
+            var b = Number(bsk.value);
+            var c = Number(csk.value);
 
-            if(isNaN(a) || )
+            if (isNaN(a) || isNaN(b) || isNaN(c) || a === 0) {
+                document.getElementById("resultats").innerHTML = "!";
+                return;
+            }
+            var atb = saknes(a, b, disk(a, b, c));
+            if (atb == false) {
+                document.getElementById("resultats").innerHTML = "Nav reālu sakņu";
+            }
+            else {
+                document.getElementById("resultats").innerHTML = `Saknes: x1 = ${atb[0].toFixed(3)}, x2 = ${atb[1].toFixed(3)}`;
+            }
         }
 
     </script>
